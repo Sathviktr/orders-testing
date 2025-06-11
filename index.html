@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekend Kitchen - You Relax, We Work</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 215, 0, 0.6);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #FFD700;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.3));
+        }
+
+        .hero-content {
+            z-index: 10;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInRight 1s ease-out 0.3s both;
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #FFD700;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+        #reviews {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.05), rgba(255, 165, 0, 0.05));
+    border-radius: 30px;
+    padding: 4rem 2rem;
+    margin-top: 2rem;
+}
+
+.review-form-container {
+    max-width: 600px;
+    margin: 0 auto 4rem auto;
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    padding: 3rem;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.form-title {
+    text-align: center;
+    color: #FFD700;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input, .form-textarea {
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 15px;
+    padding: 1rem 1.5rem;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #FFD700;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    transform: translateY(-2px);
+}
+
+.form-input::placeholder, .form-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* Rating Input Styles */
+.rating-input {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.rating-label {
+    color: #FFD700;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.stars-input {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 0.2rem;
+}
+
+.stars-input input[type="radio"] {
+    display: none;
+}
+
+.stars-input .star {
+    font-size: 2rem;
+    color: rgba(255, 215, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.stars-input .star:hover,
+.stars-input .star:hover ~ .star,
+.stars-input input[type="radio"]:checked ~ .star {
+    color: #FFD700;
+    transform: scale(1.1);
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+}
+
+/* Submit Button */
+.submit-btn {
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    border: none;
+    border-radius: 15px;
+    padding: 1rem 2rem;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4);
+    background: linear-gradient(45deg, #FFA500, #FFD700);
+}
+
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Button Loading State */
+.btn-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-top: 2px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Reviews Grid */
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* Review Card */
+.review-card {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.review-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(255, 215, 0, 0.2);
+    border-color: #FFD700;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.reviewer-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.reviewer-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(45deg, #FFD700, #FFA500);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #000;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.reviewer-name {
+    color: #FFD700;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.review-stars {
+    display: flex;
+    gap: 0.2rem;
+}
+
+.review-stars .star {
+    font-size: 1.2rem;
+    color: rgba(255, 215, 0, 0.3);
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.review-stars .star.filled {
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+}
+
+.review-date {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.review-text {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    font-size: 1rem;
+    font-style: italic;
+}
+
+/* Success Message */
+.success-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
+}
+
+.success-content {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+    border: 2px solid #FFD700;
+    border-radius: 25px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 400px;
+    backdrop-filter: blur(20px);
+    animation: successPop 0.5s ease-out;
+}
+
+@keyframes successPop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-icon {
+    font-size: 4rem;
+    color: #4CAF50;
+    margin-bottom: 1rem;
+    animation: checkmark 0.6s ease-in-out;
+}
+
+@keyframes checkmark {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.success-content h3 {
+    color: #FFD700;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.success-content p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .review-form-container {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem 3rem 1rem;
+    }
+    
+    .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .review-card {
+        padding: 1.5rem;
+    }
+    
+    .reviewer-info {
+        gap: 0.8rem;
+    }
+    
+    .reviewer-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .stars-input .star {
+        font-size: 1.8rem;
+    }
+    
+    .success-content {
+        margin: 1rem;
+        padding: 2rem;
+    }
+}
+
+/* Loading Animation for New Reviews */
+.review-card.new-review {
+    animation: newReviewAppear 0.8s ease-out;
+}
+
+@keyframes newReviewAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .about-image img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        /* Menu Section */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .menu-item {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+            border-color: #FFD700;
+        }
+
+        .menu-item h3 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .menu-item p {
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #FFA500;
+        }
+
+        /* Coming Soon Section */
+        #coming-soon {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        #coming-soon p {
+            font-size: 1.3rem;
+            color: #FFD700;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* Info Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 165, 0, 0.1));
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .info-card h3 {
+            color: #FFD700;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .info-card p {
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            margin: 2rem 0;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin: 1rem 0;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: #FFD700;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: #FFA500;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            cursor: pointer;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.8); }
+            100% { box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="image.png" width="25%" height="10%" alt="Weekend Kitchen Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#coming-soon">Coming Soon</a></li>
+                <li><a href="#info">Info</a></li>
+                <li><a href="#reviews">Review</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Weekend Kitchen</h1>
+            <p class="tagline">You Relax, We Work</p>
+            <p>Authentic Rayalaseema-style Uggani & Bajji</p>
+            <p>Available Only on Weekends & Holidays</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <h2 class="section-title">Our Story</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Welcome to Weekend Kitchen, where passion meets tradition! We're a couple of software engineers who decided to bring the authentic flavors of Rayalaseema to your doorstep during weekends and holidays.</p>
+                <p>Our journey began with a simple idea: while you relax and enjoy your precious weekend time, we'll work hard to deliver the most delicious, authentic Uggani and Bajji right to your home.</p>
+                <p>Every dish is prepared with love, using traditional recipes passed down through generations, ensuring you get that genuine taste of home-cooked food. <span style="color: #FFA500; font-weight: bold;">We use <strong>cold-pressed oils</strong> in all our cooking for the healthiest, most flavorful experience.</span></p>
+            </div>
+            <div class="about-image">
+                <div style="width: 300px; height: 300px; background: linear-gradient(45deg, , #FFD700); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #000; font-weight: bold;">
+                    <img src="image.png" alt="Weekend Kitchen Logo" style="border-radius: 50%; width: 100%; height: 50%; object-fit: cover; opacity: 0.8; transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="fade-in">
+        <h2 class="section-title">Our Specialties</h2>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <h3>🍚 Authentic Uggani with Bajji</h3>
+                <img src="uggani.jpeg" alt="Uggani" style="width: 100%; border-radius: 10px; margin-bottom: 1rem;">
+                <p>Traditional Rayalaseema-style broken rice dish, perfectly seasoned with aromatic spices and garnished with fresh coriander.</p>
+                <div class="price">Single Plate: ₹70</div>
+            </div>
+            <div class="menu-item">
+                <h3>🌶️ Full Plate</h3>
+                <img src="uggani.jpeg" alt="Mirchi Bajji" style="width: 100%; border-radius: 10px; margin-bottom: 1rem;">
+                <p>Two plates, one price, zero drama. Perfect for couples who love to share everything… especially the good stuff. <span style="color: red; font-weight: bold;">Warning:</span> May cause excessive smiling and accidental hand touches!</p>
+                <div class="price">Couple Pack: ₹130</div>
+            </div>
+            <div class="menu-item">
+                <h3>👨‍👩‍👧‍👦 Family Pack</h3>
+                <img src="image.png" alt="Family Pack" style="width: 100%; border-radius: 10px; margin-bottom: 1rem;">
+                <p>Perfect for the whole family! Generous portions of Uggani and Bajji that serve 4 people comfortably.</p>
+                <div class="price">Family Pack: ₹250</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coming Soon Section -->
+    <section id="coming-soon" class="fade-in">
+        <h2 class="section-title">Coming Soon</h2>
+        <p>Stay tuned for more flavourful and mouth-watering items from our kitchen!</p>
+    </section>
+
+    <!-- Info Section -->
+    <section id="info" class="fade-in">
+        <h2 class="section-title">Service Information</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <h3>🕐 Timings</h3>
+                <p>Morning: 7:00 AM - 11:00 AM<br>Evening: 4:00 PM - 7:00 PM</p>
+            </div>
+            <div class="info-card">
+                <h3>📅 Availability</h3>
+                <p>Weekends & Holidays Only<br>Saturday, Sunday & Public Holidays</p>
+            </div>
+            <div class="info-card">
+                <h3>⏰ Advance Order</h3>
+                <p>Please place orders at least 1 hour in advance for fresh, hot delivery</p>
+            </div>
+            <div class="info-card">
+                <h3>🚚 Delivery Areas</h3>
+                <p>Gachibowli, Lingampally, Chandanagar, Kondapur, Kothaguda & nearby areas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section HTML -->
+<section id="reviews" class="fade-in">
+    <h2 class="section-title">What Our Customers Say</h2>
+    
+    <!-- Add Review Form -->
+    <div class="review-form-container">
+        <h3 class="form-title">Share Your Experience</h3>
+        <form name="reviews" method="POST" data-netlify="true" class="review-form" id="reviewForm" netlify>
+            <input type="hidden" name="form-name" value="reviews">
+            
+            <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required class="form-input">
+            </div>
+            
+            <div class="form-group">
+                <div class="rating-input">
+                    <span class="rating-label">Your Rating:</span>
+                    <div class="stars-input">
+                        <input type="radio" name="rating" value="5" id="star5" required>
+                        <label for="star5" class="star">★</label>
+                        <input type="radio" name="rating" value="4" id="star4">
+                        <label for="star4" class="star">★</label>
+                        <input type="radio" name="rating" value="3" id="star3">
+                        <label for="star3" class="star">★</label>
+                        <input type="radio" name="rating" value="2" id="star2">
+                        <label for="star2" class="star">★</label>
+                        <input type="radio" name="rating" value="1" id="star1">
+                        <label for="star1" class="star">★</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <textarea name="review" placeholder="Share your experience with Weekend Kitchen..." required class="form-textarea"></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <span class="btn-text">Submit Review</span>
+                <div class="btn-loader" style="display: none;">
+                    <div class="spinner"></div>
+                </div>
+            </button>
+        </form>
+    </div>
+
+    <!-- Sample Reviews Display -->
+    <div class="reviews-grid" id="reviewsGrid">
+        <!-- Sample Review 1 -->
+        <div class="review-card">
+            <div class="review-header">
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">R</div>
+                    <div class="reviewer-details">
+                        <h4 class="reviewer-name">Jaya Sai</h4>
+                        <div class="review-stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-date">few hours ago</div>
+            </div>
+            <p class="review-text">"Rayalaseema Uggani is light and tasty, with a nice mix of flavors. The roasted chickpea powder and mustard seeds add a warm touch, while the crispy Mirchi Bajji makes it even better. The packaging was neat and kept everything fresh, making the whole experience enjoyable. A classic dish that feels comforting and full of tradition!!"</p>
+        </div>
+
+        <!-- Sample Review 2 -->
+        <div class="review-card">
+            <div class="review-header">
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">P</div>
+                    <div class="reviewer-details">
+                        <h4 class="reviewer-name">Yamini Vutukuri</h4>
+                        <div class="review-stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-date">few hours ago</div>
+            </div>
+            <p class="review-text">"Received my order — the packaging was very good. The taste was amazing! This was my first time experiencing such an authentic Rayalaseema flavor. Thank you for the complimentary Guntha Ponganalu; it tasted amazing too.!"</p>
+        </div>
+
+        <!-- Sample Review 3 -->
+        <div class="review-card">
+            <div class="review-header">
+                <div class="reviewer-info">
+                    <div class="reviewer-avatar">A</div>
+                    <div class="reviewer-details">
+                        <h4 class="reviewer-name">Pavan</h4>
+                        <div class="review-stars">
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                            <span class="star filled">★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-date">few hours ago</div>
+            </div>
+            <p class="review-text">"Tried this Uggani Bajji today, and it was very tasty The flavors were perfectly balanced. Would recommend this every one to try this."</p>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage" style="display: none;">
+        <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h3>Thank You!</h3>
+            <p>Your review has been submitted successfully. It will appear on the website after our review.</p>
+        </div>
+    </div>
+</section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <p>📱 WhatsApp Orders: +91 8328275699</p>
+                <p>📍 Serving: Gachibowli, Chandanagar, Miyapur, Kondapur, Hafeezpet, Lingampally</p>
+                <p>⚡ Quick Response on WhatsApp</p>
+                <p>🎯 Fresh preparation for every order</p>
+            </div>
+            <div class="social-links">
+                <p>Follow us on Instagram for updates and new menu items:</p>
+                <a href="https://www.instagram.com/weekendkitchen6702" target="_blank" rel="noopener noreferrer">Instagram: @weekendkitchen</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918328275699?text=Hi! I'd like to place an order from Weekend Kitchen" target="_blank" class="whatsapp-float">
+        <svg viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+    </a>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particles.appendChild(particle);
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        function fadeInOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        // Header background change on scroll
+        function updateHeader() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.9)';
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            createParticles();
+            fadeInOnScroll();
+        });
+
+        window.addEventListener('scroll', () => {
+            fadeInOnScroll();
+            updateHeader();
+        });
+
+        // Add floating animation to WhatsApp button
+        const whatsappButton = document.querySelector('.whatsapp-float');
+        setInterval(() => {
+            whatsappButton.style.transform = 'translateY(-5px)';
+            setTimeout(() => {
+                whatsappButton.style.transform = 'translateY(0)';
+            }, 500);
+        }, 3000);
+        document.addEventListener('DOMContentLoaded', function() {
+    const reviewForm = document.getElementById('reviewForm');
+    const successMessage = document.getElementById('successMessage');
+    const submitBtn = reviewForm.querySelector('.submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoader = submitBtn.querySelector('.btn-loader');
+
+    // Handle form submission
+    reviewForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'block';
+        submitBtn.disabled = true;
+
+        // Collect form data
+        const formData = new FormData(reviewForm);
+        
+        // Submit to Netlify
+        fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
+        })
+        .then(() => {
+            // Show success message
+            successMessage.style.display = 'flex';
+            
+            // Reset form
+            reviewForm.reset();
+            
+            // Reset star ratings
+            const stars = document.querySelectorAll('.stars-input .star');
+            stars.forEach(star => {
+                star.style.color = 'rgba(255, 215, 0, 0.3)';
+                star.style.transform = 'scale(1)';
+            });
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Sorry, there was an error submitting your review. Please try again.');
+        })
+        .finally(() => {
+            // Reset button state
+            btnText.style.display = 'block';
+            btnLoader.style.display = 'none';
+            submitBtn.disabled = false;
+        });
+    });
+
+    // Close success message when clicked
+    successMessage.addEventListener('click', function(e) {
+        if (e.target === successMessage) {
+            successMessage.style.display = 'none';
+        }
+    });
+
+    // Add interactive hover effects to review cards
+    const reviewCards = document.querySelectorAll('.review-card');
+    reviewCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
+        });
+    });
+});
+    </script>
+</body>
+</html>
