@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekend Kitchen - You Relax, We Work</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <section id="order">
+        <h2 class="section-title">Order Now</h2>
+        
+        <form name="orders" method="POST" data-netlify="true" id="orderForm">
+            <input type="hidden" name="form-name" value="orders">
+            <input type="hidden" name="order_total" id="form-total-amount">
+            <input type="hidden" name="order_timestamp" id="form-timestamp">
+            <input type="hidden" name="order_items" id="form-order-items">
+            <input type="hidden" name="user_login" id="form-user-login">
+            
+            <!-- Packed Items Section -->
+            <div class="menu-section">
+                <div class="section-header" onclick="togglePackedItems()" style="cursor: pointer;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <h3 class="menu-title">Packed Items</h3>
+                            <span class="delivery-badge">1 DAY DELIVERY</span>
+                        </div>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                </div>
+                <p class="availability-note">Available any day of the week • Ready-to-eat snacks & powders</p>
+                
+                <div class="fresh-items-list" id="packedItemsList" style="display: none;">
+                    <!-- Borugula Mixture -->
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Borugula Mixture</h4>
+                            <div class="variants">
+                                <div class="variant-item">
+                                    <p class="variant-label">250gm - ₹70</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('borugula_250', -1)">-</button>
+                                        <input type="number" name="borugula_250-quantity" id="borugula_250" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('borugula_250', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="variant-item">
+                                    <p class="variant-label">500gm - ₹140</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('borugula_500', -1)">-</button>
+                                        <input type="number" name="borugula_500-quantity" id="borugula_500" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('borugula_500', 1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chudva -->
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Chudva</h4>
+                            <div class="variants">
+                                <div class="variant-item">
+                                    <p class="variant-label">250gm - ₹100</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('chudva_250', -1)">-</button>
+                                        <input type="number" name="chudva_250-quantity" id="chudva_250" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('chudva_250', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="variant-item">
+                                    <p class="variant-label">500gm - ₹200</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('chudva_500', -1)">-</button>
+                                        <input type="number" name="chudva_500-quantity" id="chudva_500" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('chudva_500', 1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chudva Borugulu -->
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Chudva Borugulu</h4>
+                            <div class="variants">
+                                <div class="variant-item">
+                                    <p class="variant-label">250gm - ₹120</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('chudvaborugulu_250', -1)">-</button>
+                                        <input type="number" name="chudvaborugulu_250-quantity" id="chudvaborugulu_250" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('chudvaborugulu_250', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="variant-item">
+                                    <p class="variant-label">500gm - ₹220</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('chudvaborugulu_500', -1)">-</button>
+                                        <input type="number" name="chudvaborugulu_500-quantity" id="chudvaborugulu_500" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('chudvaborugulu_500', 1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nalla Karam Podi -->
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Nalla Karam Podi</h4>
+                            <div class="variants">
+                                <div class="variant-item">
+                                    <p class="variant-label">100gm - ₹100</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('nallakaram_100', -1)">-</button>
+                                        <input type="number" name="nallakaram_100-quantity" id="nallakaram_100" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('nallakaram_100', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="variant-item">
+                                    <p class="variant-label">250gm - ₹200</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('nallakaram_250', -1)">-</button>
+                                        <input type="number" name="nallakaram_250-quantity" id="nallakaram_250" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('nallakaram_250', 1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pappula Podi -->
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Pappula Podi</h4>
+                            <div class="variants">
+                                <div class="variant-item">
+                                    <p class="variant-label">100gm - ₹70</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('pappula_100', -1)">-</button>
+                                        <input type="number" name="pappula_100-quantity" id="pappula_100" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('pappula_100', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="variant-item">
+                                    <p class="variant-label">250gm - ₹140</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('pappula_250', -1)">-</button>
+                                        <input type="number" name="pappula_250-quantity" id="pappula_250" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('pappula_250', 1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kobbari Velluli Karam -->
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Kobbari Velluli Karam</h4>
+                            <div class="variants">
+                                <div class="variant-item">
+                                    <p class="variant-label">100gm - ₹120</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('kobbarivelluli_100', -1)">-</button>
+                                        <input type="number" name="kobbarivelluli_100-quantity" id="kobbarivelluli_100" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('kobbarivelluli_100', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="variant-item">
+                                    <p class="variant-label">250gm - ₹200</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('kobbarivelluli_250', -1)">-</button>
+                                        <input type="number" name="kobbarivelluli_250-quantity" id="kobbarivelluli_250" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('kobbarivelluli_250', 1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fresh Items Section -->
+            <div class="menu-section">
+                <div class="section-header">
+                    <h3 class="menu-title">Fresh Items</h3>
+                    <span class="delivery-badge">WEEKEND ONLY</span>
+                </div>
+                <p class="availability-note">Available weekends & holidays only • Freshly prepared</p>
+                
+                <div class="fresh-items-list">
+                    <!-- Uggani & Bajji -->
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Uggani & Bajji</h4>
+                            <div class="variants">
+                                <div class="variant-item">
+                                    <p class="variant-label">Single - ₹70</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('uggani_single', -1)">-</button>
+                                        <input type="number" name="uggani_single-quantity" id="uggani_single" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('uggani_single', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="variant-item">
+                                    <p class="variant-label">Couple - ₹130</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('uggani_couple', -1)">-</button>
+                                        <input type="number" name="uggani_couple-quantity" id="uggani_couple" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('uggani_couple', 1)">+</button>
+                                    </div>
+                                </div>
+                                <div class="variant-item">
+                                    <p class="variant-label">Family - ₹250</p>
+                                    <div class="quantity-controls">
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('uggani_family', -1)">-</button>
+                                        <input type="number" name="uggani_family-quantity" id="uggani_family" value="0" min="0" readonly>
+                                        <button type="button" class="quantity-btn" onclick="updateQuantity('uggani_family', 1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fixed price items -->
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Guntha Ponganalu (8pc)</h4>
+                            <p class="price">₹60</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('guntha', -1)">-</button>
+                            <input type="number" name="guntha-quantity" id="guntha" value="0" min="0" readonly>
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('guntha', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Egg Ponganalu (6pc)</h4>
+                            <p class="price">₹60</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('guddu', -1)">-</button>
+                            <input type="number" name="guddu-quantity" id="guddu" value="0" min="0" readonly>
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('guddu', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Uggani Bajji & Ponganalu</h4>
+                            <p class="price">₹120</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('ugganiponganalu', -1)">-</button>
+                            <input type="number" name="ugganiponganalu-quantity" id="ugganiponganalu" value="0" min="0" readonly>
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('ugganiponganalu', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Uggani Bajji & Egg Ponganalu</h4>
+                            <p class="price">₹130</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('ugganiguddu', -1)">-</button>
+                            <input type="number" name="ugganiguddu-quantity" id="ugganiguddu" value="0" min="0" readonly>
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('ugganiguddu', 1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="fresh-item">
+                        <div class="item-info">
+                            <h4>Extra Bajji</h4>
+                            <p class="price">₹10</p>
+                        </div>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('extrabajji', -1)">-</button>
+                            <input type="number" name="extrabajji-quantity" id="extrabajji" value="0" min="0" readonly>
+                            <button type="button" class="quantity-btn" onclick="updateQuantity('extrabajji', 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total Section -->
+            <div class="total-section">
+                <h3>Total Amount: <span id="totalAmount">₹0</span></h3>
+            </div>
+
+            <!-- Contact Details -->
+            <div class="contact-details-section">
+                <h3 class="form-subtitle">Delivery Details</h3>
+                <div class="form-group">
+                    <input type="text" name="name" placeholder="Your Name" required class="form-input">
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="phone" placeholder="WhatsApp Number" required class="form-input">
+                </div>
+                <div class="form-group">
+                    <textarea name="address" placeholder="Delivery Address" required class="form-textarea"></textarea>
+                </div>
+                
+                <div class="form-group datetime-group">
+                    <label class="datetime-label">Preferred Delivery Time (Optional)</label>
+                    <div class="datetime-inputs">
+                        <input type="date" name="preferred_date" class="form-input date-input">
+                        <input type="time" name="preferred_time" class="form-input time-input">
+                    </div>
+                    <p class="datetime-hint">Fresh items: Weekends & Holidays, 7AM-11AM & 4PM-7PM<br>Packed items: Any day, flexible timing</p>
+                </div>
+            </div>
+            
+            <br>
+            <center>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Place Order</span>
+                    <div class="btn-loader" style="display: none;">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+            </center>
+        </form>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+</html>
