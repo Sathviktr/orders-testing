@@ -282,3 +282,34 @@ function setupDateTimeValidation() {
         });
     }
 }
+const REVIEWS_PER_PAGE = 2; // Adjust as needed
+const reviewsGrid = document.getElementById('reviewsGrid');
+const reviewCards = reviewsGrid.querySelectorAll('.review-card');
+const prevBtn = document.getElementById('prevReviews');
+const nextBtn = document.getElementById('nextReviews');
+let currentPage = 0;
+
+function updateReviews() {
+    const totalPages = Math.ceil(reviewCards.length / REVIEWS_PER_PAGE);
+    // Calculate the width to shift (assuming each card is the same width)
+    const shift = currentPage * reviewsGrid.offsetWidth;
+    reviewsGrid.style.transform = `translateX(-${currentPage * 100}%)`;
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage >= totalPages - 1;
+}
+
+prevBtn.addEventListener('click', () => {
+    if (currentPage > 0) {
+        currentPage--;
+        updateReviews();
+    }
+});
+nextBtn.addEventListener('click', () => {
+    const totalPages = Math.ceil(reviewCards.length / REVIEWS_PER_PAGE);
+    if (currentPage < totalPages - 1) {
+        currentPage++;
+        updateReviews();
+    }
+});
+
+updateReviews();
