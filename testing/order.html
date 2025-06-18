@@ -331,24 +331,26 @@
     </section>
 
     <script src="main.js"></script>
-        <div id="fssaiModal" style="display:none; position:fixed; z-index:1001; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4);">
+   <div id="fssaiModal" style="display:none; position:fixed; z-index:1001; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4);">
   <div style="background:#fff; margin:10% auto; padding:24px 18px 18px 18px; border-radius:12px; width:90%; max-width:350px; text-align:center; position:relative; box-shadow:0 8px 24px rgba(0,0,0,0.18);">
     <span id="closeFssai" style="position:absolute; top:10px; right:18px; font-size:2rem; font-weight:bold; color:#888; cursor:pointer;">&times;</span>
-    <!-- Replace the src below with your own image or badge -->
     <h3 style="margin:10px 0 6px 0; color:#000;">👉 For orders above ₹350,
-we’ll cover half of your delivery fee.<br><br>
-Because your cravings matter.
-And so does your wallet.</h3>
+    we’ll cover half of your delivery fee.<br><br>
+    Because your cravings matter.
+    And so does your wallet.</h3>
   </div>
 </div>
 
 <script>
 window.addEventListener('DOMContentLoaded', function() {
-  // Show only once per session
+  // Show the modal on page load
+  document.getElementById('fssaiModal').style.display = 'block';
+
+  // Close on click of 'X'
   document.getElementById('closeFssai').onclick = function() {
     document.getElementById('fssaiModal').style.display = 'none';
   };
-  // Also close if clicking outside the content
+  // Close if clicking outside the modal content
   document.getElementById('fssaiModal').onclick = function(e) {
     if (e.target === this) this.style.display = 'none';
   }
