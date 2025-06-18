@@ -345,10 +345,6 @@ And so does your wallet.</h3>
 <script>
 window.addEventListener('DOMContentLoaded', function() {
   // Show only once per session
-  if (!sessionStorage.getItem('fssaiShown')) {
-    document.getElementById('fssaiModal').style.display = 'block';
-    sessionStorage.setItem('fssaiShown', '1');
-  }
   document.getElementById('closeFssai').onclick = function() {
     document.getElementById('fssaiModal').style.display = 'none';
   };
