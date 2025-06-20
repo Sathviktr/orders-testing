@@ -13,11 +13,14 @@ const PRICES = {
     pappula_250: 140,
     kobbarivelluli_100: 80,
     kobbarivelluli_250: 160,
+    sununda_250: 190,
+    sununda_500: 380,
     
     // Fresh items with variants
     uggani_single: 70,
     uggani_couple: 130,
     uggani_family: 250,
+    poha: 70,
     
     // Fixed price items
     guntha: 60,
@@ -42,6 +45,8 @@ const ITEM_NAMES = {
     pappula_250: "Pappula Podi (250gm)",
     kobbarivelluli_100: "Kobbari Velluli Karam (100gm)",
     kobbarivelluli_250: "Kobbari Velluli Karam (250gm)",
+    sununda_250: "Sununda (250gm)",
+    sununda_500: "Sununda (500gm)",
     
     // Fresh items
     uggani_single: "Uggani & Bajji (Single)",
@@ -51,6 +56,7 @@ const ITEM_NAMES = {
     guddu: "Guddu Ponganalu (6pc)",
     ugganiponganalu: "Uggani Bajji & Ponganalu",
     ugganiguddu: "Uggani Bajji & Guddu Ponganalu",
+    poha: "Poha",
     extrabajji: "Extra Bajji"
 };
 
@@ -128,7 +134,7 @@ function updateTotal() {
 function hasFreshItems() {
     const freshItemIds = [
         'uggani_single', 'uggani_couple', 'uggani_family',
-        'guntha', 'guddu', 'ugganiponganalu', 'ugganiguddu', 'extrabajji'
+        'guntha', 'guddu', 'ugganiponganalu', 'ugganiguddu','poha', 'extrabajji'
     ];
     
     return freshItemIds.some(id => 
