@@ -20,6 +20,10 @@ const PRICES = {
     uggani_single: 70,
     uggani_couple: 130,
     uggani_family: 250,
+    dosa_plain: 60,
+    dosa_karam: 70,
+    dosa_ghee: 80,
+    dosa_egg: 90,
     poha: 70,
     
     // Fixed price items
@@ -52,6 +56,10 @@ const ITEM_NAMES = {
     uggani_single: "Uggani & Bajji (Single)",
     uggani_couple: "Uggani & Bajji (Couple)",
     uggani_family: "Uggani & Bajji (Family)",
+    dosa_plain: "Plain Dosa",
+    dosa_karam:"Karam Dosa",
+    dosa_ghee:"Ghee Karam Dosa",
+    dosa_egg:"Egg Dosa",
     guntha: "Guntha Ponganalu (8pc)",
     guddu: "Guddu Ponganalu (6pc)",
     ugganiponganalu: "Uggani Bajji & Ponganalu",
@@ -134,7 +142,7 @@ function updateTotal() {
 function hasFreshItems() {
     const freshItemIds = [
         'uggani_single', 'uggani_couple', 'uggani_family',
-        'guntha', 'guddu', 'ugganiponganalu', 'ugganiguddu','poha', 'extrabajji'
+        'guntha', 'guddu', 'ugganiponganalu', 'ugganiguddu','poha', 'extrabajji','dosa_plain','dosa_karam','dosa_ghee','dosa_egg'
     ];
     
     return freshItemIds.some(id => 
