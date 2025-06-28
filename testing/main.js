@@ -174,11 +174,6 @@ function setupDateTimeValidation() {
         timeInput.addEventListener('change', function() {
             const time = this.value;
             const hour = parseInt(time.split(':')[0]);
-            
-            if (hasFreshItems() && (hour < 7 || (hour > 11 && hour < 16) || hour > 19)) {
-                alert('Fresh items delivery time: 7:00 AM - 11:00 AM or 4:00 PM - 7:00 PM. Packed items have flexible timing.');
-                this.value = '';
-            }
         });
     }
 }
