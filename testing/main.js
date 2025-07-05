@@ -25,7 +25,9 @@ const PRICES = {
     dosa_ghee: 80,
     dosa_egg: 90,
     poha: 70,
-    
+    pulav_single: 150,
+    pulav_full: 250,
+    pulav_family: 429,
     // Fixed price items
     guntha: 60,
     guddu: 60,
@@ -65,7 +67,10 @@ const ITEM_NAMES = {
     ugganiponganalu: "Uggani Bajji & Ponganalu",
     ugganiguddu: "Uggani Bajji & Guddu Ponganalu",
     poha: "Poha",
-    extrabajji: "Extra Bajji"
+    extrabajji: "Extra Bajji",
+    pulav_single: "pulav chicken-single",
+    pulav_full: "pulav chicken-full",
+    pulav_family: "pulav chicken-family pack"
 };
 
 // Create floating particles
@@ -142,7 +147,7 @@ function updateTotal() {
 function hasFreshItems() {
     const freshItemIds = [
         'uggani_single', 'uggani_couple', 'uggani_family',
-        'guntha', 'guddu', 'ugganiponganalu', 'ugganiguddu','poha', 'extrabajji','dosa_plain','dosa_karam','dosa_ghee','dosa_egg'
+        'guntha', 'guddu', 'ugganiponganalu', 'ugganiguddu','poha', 'extrabajji','dosa_plain','dosa_karam','dosa_ghee','dosa_egg','pulav_single','pulav_full','pulav_family'
     ];
     
     return freshItemIds.some(id => 
